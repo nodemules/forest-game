@@ -9,5 +9,8 @@ spring:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
       ddl-auto: create-drop
 logging:
+  path: log/
+  level:
+    com.nodemules.games.forest: trace
   pattern:
-    console: "%msg%n"
+    console:
