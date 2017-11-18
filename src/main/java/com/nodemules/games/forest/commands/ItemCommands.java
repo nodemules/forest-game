@@ -30,7 +30,7 @@ public class ItemCommands {
   @ShellMethod(value = "Makes a new item", key = "item make")
   public String makeItem(
       @ShellOption(help = "The name of the command (defaults to null)") String name,
-      @ShellOption(help = "The description of the command (defaults to null)", defaultValue = "") String description
+      @ShellOption(help = "The description of the command (defaults to null)", defaultValue = ShellOption.NULL) String description
   ) {
     if (name == null) {
       throw new InvalidInputException("A name is required to make an item");
