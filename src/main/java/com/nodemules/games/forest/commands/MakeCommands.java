@@ -29,8 +29,8 @@ public class MakeCommands {
   @ShellMethod(value = "Makes a new command", key = "command make")
   public String makeCommand(
       @ShellOption(help = "The command key") String key,
-      @ShellOption(help = "The name of the command (defaults to null)", defaultValue = "") String name,
-      @ShellOption(help = "The description of the command (defaults to null)", defaultValue = "") String description
+      @ShellOption(help = "The name of the command (defaults to null)", defaultValue = ShellOption.NULL) String name,
+      @ShellOption(help = "The description of the command (defaults to null)", defaultValue = ShellOption.NULL) String description
   ) {
     if (key == null) {
       throw new InvalidInputException("A key is required to make a command");

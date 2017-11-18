@@ -28,7 +28,7 @@ public class RegisterCommands {
   public String register(
       @ShellOption(help = "A unique username") String username,
       @ShellOption(help = "The password for the new User") String password,
-      @ShellOption(defaultValue = "") String email) {
+      @ShellOption(defaultValue = ShellOption.NULL) String email) {
     try {
       registerService.register(username, password, email);
     } catch (AuthenticationException e) {
