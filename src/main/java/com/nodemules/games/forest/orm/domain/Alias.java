@@ -1,6 +1,7 @@
 package com.nodemules.games.forest.orm.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Alias implements Serializable {
   private static final long serialVersionUID = -8879830458708438400L;
 
   @Id
+  @Column(name="alias_id")
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 

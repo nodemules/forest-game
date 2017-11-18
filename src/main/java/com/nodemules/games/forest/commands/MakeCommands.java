@@ -26,21 +26,24 @@ public class MakeCommands {
     this.commandRepo = commandRepo;
   }
 
-  @ShellMethod("Makes a new command")
-  public String makeCommand(String value, @ShellOption(defaultValue = "") String name,
-      @ShellOption(defaultValue = "") String description) {
-    if (value == null) {
-      throw new InvalidInputException("A value is required to make a command");
+  @ShellMethod(value = "Makes a new command", key = "command make")
+  public String makeCommand(
+      @ShellOption(help = "The command key") String key,
+      @ShellOption(help = "The name of the command (defaults to null)", defaultValue = "") String name,
+      @ShellOption(help = "The description of the command (defaults to null)", defaultValue = "") String description
+  ) {
+    if (key == null) {
+      throw new InvalidInputException("A key is required to make a command");
     }
     Command c = new Command();
-    c.setValue(value);
+    c.setValue(key);
     c.setName(name);
     c.setDescription(description);
     commandRepo.save(c);
-    return String.format("Command `%s` created!", value);
+    return String.format("Command `%s` created!", key);
   }
 
-  @ShellMethod("Lists commands")
+  @ShellMethod(value = "Lists commands", key = "command list")
   public List<String> listCommands() {
     List<Command> commands = commandRepo.findAll();
 
