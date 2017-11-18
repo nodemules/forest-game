@@ -6,6 +6,7 @@ import com.nodemules.games.forest.service.LoginOperations;
 import com.nodemules.games.forest.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -34,6 +35,13 @@ public class LoginCommands {
       return false;
     }
     return true;
+  }
+
+  public Availability whoamiAvailability() {
+    if (loginService.isUserLoggedIn()) {
+      return Availability.available();
+    }
+    return Availability.unavailable("it is not available to users who are not logged in");
   }
 
   @ShellMethod(value = "Tells you who is logged into the system", key = "whoami")

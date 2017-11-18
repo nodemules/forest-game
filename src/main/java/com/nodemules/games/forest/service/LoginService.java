@@ -44,4 +44,9 @@ public class LoginService implements LoginOperations {
     return userMapper.toBean(currentUser);
   }
 
+  @Override
+  public boolean isUserLoggedIn() {
+    return userContext.isUserLoggedIn();
+  }
+
 }

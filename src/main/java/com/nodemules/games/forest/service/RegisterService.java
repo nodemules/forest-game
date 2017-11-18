@@ -34,6 +34,10 @@ public class RegisterService implements RegisterOperations {
 
   @Override
   public void register(UserModel user) throws AuthenticationException {
+    if (user.getPassword() == null || "".equals(user.getPassword().trim())) {
+      log.error("Unable to register user: [{}] because a password was not provided.", user.getUsername());
+      throw new AuthenticationException("A password is required to create a User");
+    }
     log.info("Registering user: {}", user.getUsername());
     userManager.create(user);
   }

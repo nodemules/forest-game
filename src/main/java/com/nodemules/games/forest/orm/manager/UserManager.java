@@ -63,8 +63,10 @@ public class UserManager implements UserManagement {
     if (u == null) {
       throw new AuthenticationException("User not found!");
     }
-    boolean validPassword = EncryptionUtil.decrypt(user.getPassword(), u.getEncryptedPassword());
-    if (user.getPassword() == null || !validPassword) {
+    if (user.getPassword() == null) {
+      throw new AuthenticationException("A password is required to login");
+    }
+    if (!EncryptionUtil.decrypt(user.getPassword(), u.getEncryptedPassword())) {
       throw new AuthenticationException("Invalid password!");
     }
     u.setLastLoginTime(new Date());

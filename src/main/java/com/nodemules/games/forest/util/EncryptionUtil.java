@@ -22,14 +22,10 @@ public final class EncryptionUtil {
 
   @PostConstruct
   private static void setPasswordEncoder() {
-    log.info("EncryptionUtil::setPasswordEncoder");
     passwordEncoder = new BCryptPasswordEncoder();
-    log.info("passwordEncoder={}", passwordEncoder);
   }
 
   public static String encrypt(String raw) {
-    log.info("passwordEncoder={}", passwordEncoder);
-    log.info("encoding raw password: {}", raw);
     return passwordEncoder.encode(raw);
   }
 
