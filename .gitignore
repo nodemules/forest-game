@@ -25,3 +25,4 @@ nbdist/
 
 spring-shell.log
 log/
+src/main/resources/application-*.yml
