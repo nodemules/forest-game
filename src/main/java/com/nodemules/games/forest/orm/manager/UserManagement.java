@@ -19,5 +19,7 @@ public interface UserManagement {
 
   UserModel findByUsername(String username);
 
-  UserModel loginUser(UserModel user);
+  UserModel loginUser(String username, String password) throws AuthenticationException;
+
+  UserModel loginUser(UserModel user) throws AuthenticationException;
 }

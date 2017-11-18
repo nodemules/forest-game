@@ -29,22 +29,19 @@ public class LoginService implements LoginOperations {
   }
 
   @Override
-  public User login(String username) throws AuthenticationException {
-    UserModel user = userManager.findByUsername(username);
-    if (user == null) {
-      throw new AuthenticationException("Could not find user!");
-    }
-    user = userManager.loginUser(user);
+  public User login(String username, String password) throws AuthenticationException {
+    UserModel user = userManager.loginUser(username, password);
     userContext.setCurrentUser(user);
     return userMapper.toBean(user);
   }
 
   @Override
   public User whoami() throws AuthenticationException {
-    if (userContext.getCurrentUser() == null) {
+    UserModel currentUser = userContext.getCurrentUser();
+    if (currentUser == null) {
       throw new AuthenticationException("User is not logged in!");
     }
-    return userMapper.toBean(userContext.getCurrentUser());
+    return userMapper.toBean(currentUser);
   }
 
 }

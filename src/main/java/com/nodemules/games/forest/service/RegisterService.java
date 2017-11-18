@@ -4,6 +4,7 @@ import com.nodemules.games.forest.exception.AuthenticationException;
 import com.nodemules.games.forest.model.UserModel;
 import com.nodemules.games.forest.orm.manager.UserManagement;
 import com.nodemules.games.forest.orm.manager.UserManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
  * @author brent
  * @since 11/18/17.
  */
+@Slf4j
 @Service
 public class RegisterService implements RegisterOperations {
 
@@ -25,11 +27,14 @@ public class RegisterService implements RegisterOperations {
   public void register(String username, String password, String email) throws AuthenticationException {
     UserModel user = new UserModel();
     user.setUsername(username);
+    user.setPassword(password);
+    user.setEmail(email);
     register(user);
   }
 
   @Override
   public void register(UserModel user) throws AuthenticationException {
+    log.info("Registering user: {}", user.getUsername());
     userManager.create(user);
   }
 

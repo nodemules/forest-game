@@ -26,9 +26,8 @@ public class LoginCommands {
 
   @ShellMethod(value = "Logs a user into the system", key = "login")
   public boolean login(String username, String password) {
-
     try {
-      loginService.login(username);
+      loginService.login(username, password);
     } catch (AuthenticationException e) {
       log.error("ERROR: INVALID LOGIN");
       log.trace("TRACE:", e);

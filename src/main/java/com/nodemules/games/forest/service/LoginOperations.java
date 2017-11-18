@@ -9,7 +9,7 @@ import com.nodemules.games.forest.objects.User;
  */
 public interface LoginOperations {
 
-  User login(String username) throws AuthenticationException;
+  User login(String username, String password) throws AuthenticationException;
 
   User whoami() throws AuthenticationException;
 }
