@@ -12,4 +12,7 @@ public class UserContext {
 
   private UserModel currentUser;
 
+  public boolean isUserLoggedIn() {
+    return currentUser != null;
+  }
 }
