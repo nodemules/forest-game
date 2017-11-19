@@ -20,6 +20,7 @@ public class Item {
   // @formatter:on
 
   private String name;
+  private String description;
 
   public void print() {
     System.out.println(String.format(ITEM_TEMPLATE, name));

@@ -19,10 +19,10 @@ public abstract class AbstractEntity {
   @GeneratedValue
   protected Long id;
 
-  @Column(insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  @Column(insertable = false, updatable = false)
   private Timestamp dateCreated;
 
-  @Column(insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+  @Column(insertable = false, updatable = false)
   private Timestamp dateModified;
 
 }

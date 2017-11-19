@@ -1,8 +1,10 @@
 package com.nodemules.games.forest.commands;
 
 import com.nodemules.games.forest.exception.InvalidInputException;
+import com.nodemules.games.forest.model.ItemModel;
 import com.nodemules.games.forest.objects.Item;
-import com.nodemules.games.forest.orm.repository.ItemRepository;
+import com.nodemules.games.forest.service.ItemOperations;
+import com.nodemules.games.forest.service.ItemService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -20,35 +22,34 @@ import org.springframework.shell.standard.ShellOption;
 public class ItemCommands {
 
 
-  private ItemRepository itemRepo;
+  private ItemOperations itemService;
 
   @Autowired
-  public ItemCommands(ItemRepository itemRepo) {
-    this.itemRepo = itemRepo;
+  public ItemCommands(ItemService itemService) {
+    this.itemService = itemService;
   }
 
   @ShellMethod(value = "Makes a new item", key = "item make")
-  public String makeItem(
+  public String create(
       @ShellOption(help = "The name of the command (defaults to null)") String name,
       @ShellOption(help = "The description of the command (defaults to null)", defaultValue = ShellOption.NULL) String description
   ) {
     if (name == null) {
       throw new InvalidInputException("A name is required to make an item");
     }
-    com.nodemules.games.forest.orm.domain.Item c = new com.nodemules.games.forest.orm.domain.Item();
-    c.setName(name);
-    c.setDescription(description);
-    itemRepo.save(c);
+    ItemModel item = new ItemModel();
+    item.setName(name);
+    item.setDescription(description);
+    itemService.create(item);
     return String.format("Item `%s` created!", name);
   }
 
   @ShellMethod(value = "Lists items", key = "item list")
   public List<String> listItems() {
-    List<com.nodemules.games.forest.orm.domain.Item> commands = itemRepo.findAll();
+    List<Item> items = itemService.getItems();
+    log.info("{} items found", items.size());
 
-    log.info("{} items found", commands.size());
-
-    return commands.stream().map(com.nodemules.games.forest.orm.domain.Item::getName).collect(Collectors.toList());
+    return items.stream().map(Item::getName).collect(Collectors.toList());
   }
 
   @ShellMethod(value = "Prints an item", key = "item print")
