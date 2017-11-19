@@ -13,9 +13,16 @@ import org.junit.Test;
 public class ItemCommandsTest extends AbstractCommandsTestSuite {
 
   @Test
-  public void test() throws Exception {
+  public void testItemList() throws Exception {
     List<String> r = execute("item list");
     Assert.assertTrue(r.size() == 2);
+  }
+
+  @Test
+  public void testItemMake() throws Exception {
+    String name = "toast";
+    String message = execute(String.format("item make %s", name));
+    Assert.assertEquals(String.format("Item `%s` created!", name), message);
   }
 
 }

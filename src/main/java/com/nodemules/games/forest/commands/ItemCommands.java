@@ -1,6 +1,5 @@
 package com.nodemules.games.forest.commands;
 
-import com.nodemules.games.forest.exception.InvalidInputException;
 import com.nodemules.games.forest.model.ItemModel;
 import com.nodemules.games.forest.objects.Item;
 import com.nodemules.games.forest.service.ItemOperations;
@@ -34,9 +33,6 @@ public class ItemCommands {
       @ShellOption(help = "The name of the command (defaults to null)") String name,
       @ShellOption(help = "The description of the command (defaults to null)", defaultValue = ShellOption.NULL) String description
   ) {
-    if (name == null) {
-      throw new InvalidInputException("A name is required to make an item");
-    }
     ItemModel item = new ItemModel();
     item.setName(name);
     item.setDescription(description);
