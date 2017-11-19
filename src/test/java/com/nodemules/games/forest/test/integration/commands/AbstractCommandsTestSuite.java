@@ -44,4 +44,8 @@ public abstract class AbstractCommandsTestSuite extends AbstractJUnit4SpringCont
     return (T) shell.evaluate(() -> command);
   }
 
+  protected String formatCommand(String command, String argument) {
+    return String.format("%s %s", command, argument);
+  }
+
 }

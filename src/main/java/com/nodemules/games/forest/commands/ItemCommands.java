@@ -49,8 +49,7 @@ public class ItemCommands {
 
   @ShellMethod(value = "Prints an item", key = "item print")
   public void print(String name) {
-    Item item = new Item();
-    item.setName(name);
+    Item item = itemService.getItem(name);
     item.print();
   }
 

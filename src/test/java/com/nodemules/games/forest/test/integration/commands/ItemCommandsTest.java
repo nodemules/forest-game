@@ -12,6 +12,13 @@ import org.junit.Test;
 @Slf4j
 public class ItemCommandsTest extends AbstractCommandsTestSuite {
 
+  private static final String TEST_ITEM_NAME = "toast";
+
+  @Test
+  public void testItemPrint() throws Exception {
+    execute(formatCommand("item print", TEST_ITEM_NAME));
+  }
+
   @Test
   public void testItemList() throws Exception {
     List<String> r = execute("item list");
@@ -20,9 +27,8 @@ public class ItemCommandsTest extends AbstractCommandsTestSuite {
 
   @Test
   public void testItemMake() throws Exception {
-    String name = "toast";
-    String message = execute(String.format("item make %s", name));
-    Assert.assertEquals(String.format("Item `%s` created!", name), message);
+    String message = execute(formatCommand("item make", TEST_ITEM_NAME));
+    Assert.assertEquals(String.format("Item `%s` created!", TEST_ITEM_NAME), message);
   }
 
 }
