@@ -40,4 +40,8 @@ public abstract class AbstractCommandsTestSuite extends AbstractJUnit4SpringCont
     log.info("After");
   }
 
+  protected <T> T execute(String command) {
+    return (T) shell.evaluate(() -> command);
+  }
+
 }
