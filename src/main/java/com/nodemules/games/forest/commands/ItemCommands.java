@@ -20,7 +20,6 @@ import org.springframework.shell.standard.ShellOption;
 @ShellComponent
 public class ItemCommands {
 
-
   private ItemOperations itemService;
 
   @Autowired
