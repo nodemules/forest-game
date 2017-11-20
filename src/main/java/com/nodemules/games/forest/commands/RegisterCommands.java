@@ -24,7 +24,7 @@ public class RegisterCommands {
     this.registerService = registerService;
   }
 
-  @ShellMethod("Registers a user")
+  @ShellMethod(value = "Registers a user", key = "user register")
   public String register(
       @ShellOption(help = "A unique username") String username,
       @ShellOption(help = "The password for the new User") String password,
@@ -35,7 +35,7 @@ public class RegisterCommands {
       log.trace("TRACE:", e);
       return e.getMessage();
     }
-    return "Registered!";
+    return String.format("Registered %s!", username);
   }
 
 }

@@ -35,18 +35,4 @@ public class LoginService implements LoginOperations {
     return userMapper.toBean(user);
   }
 
-  @Override
-  public User whoami() throws AuthenticationException {
-    UserModel currentUser = userContext.getCurrentUser();
-    if (currentUser == null) {
-      throw new AuthenticationException("User is not logged in!");
-    }
-    return userMapper.toBean(currentUser);
-  }
-
-  @Override
-  public boolean isUserLoggedIn() {
-    return userContext.isUserLoggedIn();
-  }
-
 }

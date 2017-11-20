@@ -48,4 +48,13 @@ public abstract class AbstractCommandsTestSuite extends AbstractJUnit4SpringCont
     return String.format("%s %s", command, argument);
   }
 
+  protected String formatCommand(String command, String... arguments) {
+    StringBuilder formatted = new StringBuilder(command);
+    for (String a : arguments) {
+      formatted.append(" ").append(a);
+    }
+
+    return formatted.toString();
+  }
+
 }

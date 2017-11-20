@@ -11,7 +11,4 @@ public interface LoginOperations {
 
   User login(String username, String password) throws AuthenticationException;
 
-  User whoami() throws AuthenticationException;
-
-  boolean isUserLoggedIn();
 }
