@@ -5,8 +5,6 @@ import com.nodemules.games.forest.exception.AuthenticationException;
 import com.nodemules.games.forest.mapper.UserMapper;
 import com.nodemules.games.forest.model.UserModel;
 import com.nodemules.games.forest.objects.User;
-import com.nodemules.games.forest.orm.manager.UserManagement;
-import com.nodemules.games.forest.orm.manager.UserManager;
 import fr.xebia.extras.selma.Selma;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService implements AuthenticationOperations {
 
-  private UserManagement userManager;
   private UserContext userContext;
   private static UserMapper userMapper = Selma.builder(UserMapper.class).build();
 
   @Autowired
-  public AuthenticationService(UserManager userManager, UserContext userContext) {
-    this.userManager = userManager;
+  public AuthenticationService(UserContext userContext) {
     this.userContext = userContext;
   }
 
