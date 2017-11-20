@@ -33,7 +33,7 @@ public class UserContext {
       throw new AuthenticationException("Cannot logout a user who is not logged in");
     }
     lastLogoutTime = new Date();
-    log.debug("Logging out [{}], logged in for: ", currentUser.getUsername(),
+    log.debug("Logging out [{}], logged in for: {} milliseconds", currentUser.getUsername(),
         DateTimeUtil.elapsedTime(lastLoginTime, lastLogoutTime));
     currentUser = null;
   }
