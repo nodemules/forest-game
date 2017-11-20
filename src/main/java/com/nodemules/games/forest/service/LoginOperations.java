@@ -11,4 +11,5 @@ public interface LoginOperations {
 
   User login(String username, String password) throws AuthenticationException;
 
+  void logout() throws AuthenticationException;
 }

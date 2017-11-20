@@ -15,11 +15,6 @@ public class ItemCommandsTest extends AbstractCommandsTestSuite {
   private static final String TEST_ITEM_NAME = "toast";
 
   @Test
-  public void testItemPrint() throws Exception {
-    execute(formatCommand("item print", TEST_ITEM_NAME));
-  }
-
-  @Test
   public void testItemList() throws Exception {
     List<String> r = execute("item list");
     Assert.assertTrue(r.size() == 2);

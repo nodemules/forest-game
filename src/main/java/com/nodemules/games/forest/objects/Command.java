@@ -5,14 +5,16 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author brent
- * @since 11/17/17.
+ * @since 11/19/17.
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Item extends Printable {
+public class Command extends Printable {
 
-  private static final long serialVersionUID = -2152948617329560906L;
+  private static final long serialVersionUID = -6327559867510923325L;
+  private String key;
 
   private String description;
 
 }
+

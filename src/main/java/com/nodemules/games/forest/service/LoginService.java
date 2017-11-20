@@ -31,8 +31,13 @@ public class LoginService implements LoginOperations {
   @Override
   public User login(String username, String password) throws AuthenticationException {
     UserModel user = userManager.loginUser(username, password);
-    userContext.setCurrentUser(user);
+    userContext.login(user);
     return userMapper.toBean(user);
+  }
+
+  @Override
+  public void logout() throws AuthenticationException {
+    userContext.logout();
   }
 
 }

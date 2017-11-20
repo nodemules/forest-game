@@ -47,10 +47,4 @@ public class ItemCommands {
     return items.stream().map(Item::getName).collect(Collectors.toList());
   }
 
-  @ShellMethod(value = "Prints an item", key = "item print")
-  public void print(String name) {
-    Item item = itemService.getItem(name);
-    item.print();
-  }
-
 }

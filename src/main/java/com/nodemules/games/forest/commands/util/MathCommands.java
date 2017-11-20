@@ -1,4 +1,4 @@
-package com.nodemules.games.forest.commands;
+package com.nodemules.games.forest.commands.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellComponent;
