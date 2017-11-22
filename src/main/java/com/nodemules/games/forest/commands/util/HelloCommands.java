@@ -1,4 +1,4 @@
-package com.nodemules.games.forest.commands;
+package com.nodemules.games.forest.commands.util;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

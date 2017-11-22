@@ -1,7 +1,8 @@
 package com.nodemules.games.forest.commands;
 
 import com.nodemules.games.forest.exception.AuthenticationException;
-import com.nodemules.games.forest.objects.User;
+import com.nodemules.games.forest.service.AuthenticationOperations;
+import com.nodemules.games.forest.service.AuthenticationService;
 import com.nodemules.games.forest.service.LoginOperations;
 import com.nodemules.games.forest.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +21,22 @@ public class LoginCommands {
 
   private LoginOperations loginService;
 
+  private AuthenticationOperations authService;
+
   @Autowired
-  public LoginCommands(LoginService loginService) {
+  public LoginCommands(LoginService loginService, AuthenticationService authService) {
     this.loginService = loginService;
+    this.authService = authService;
   }
 
-  @ShellMethod(value = "Logs a user into the system", key = "login")
+  public Availability loginAvailability() {
+    if (authService.isUserLoggedIn()) {
+      return Availability.unavailable("it is not available to users who are not logged in");
+    }
+    return Availability.available();
+  }
+
+  @ShellMethod(value = "Logs a user into the system", key = "user login")
   public boolean login(String username, String password) {
     try {
       loginService.login(username, password);
@@ -37,23 +48,23 @@ public class LoginCommands {
     return true;
   }
 
-  public Availability whoamiAvailability() {
-    if (loginService.isUserLoggedIn()) {
+  public Availability logoutAvailability() {
+    if (authService.isUserLoggedIn()) {
       return Availability.available();
     }
     return Availability.unavailable("it is not available to users who are not logged in");
   }
 
-  @ShellMethod(value = "Tells you who is logged into the system", key = "whoami")
-  public String whoami() {
-    User user;
+  @ShellMethod(value = "Logs out the current authenticated user", key = "user logout")
+  public boolean logout() {
     try {
-      user = loginService.whoami();
+      loginService.logout();
     } catch (AuthenticationException e) {
-      log.trace("loginService.whoami()", e);
-      return e.getMessage();
+      log.error("ERROR: UNABLE TO LOGOUT");
+      log.trace("TRACE:", e);
+      return false;
     }
-    return user.getUsername();
+    return true;
   }
 
 }

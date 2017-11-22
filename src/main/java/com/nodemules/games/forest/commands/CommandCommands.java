@@ -1,8 +1,8 @@
 package com.nodemules.games.forest.commands;
 
-import com.nodemules.games.forest.exception.InvalidInputException;
-import com.nodemules.games.forest.orm.domain.Command;
-import com.nodemules.games.forest.orm.repository.CommandRepository;
+import com.nodemules.games.forest.objects.Command;
+import com.nodemules.games.forest.service.CommandOperations;
+import com.nodemules.games.forest.service.CommandService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +17,13 @@ import org.springframework.shell.standard.ShellOption;
  */
 @Slf4j
 @ShellComponent
-public class MakeCommands {
+public class CommandCommands {
 
-  private CommandRepository commandRepo;
+  private CommandOperations commandService;
 
   @Autowired
-  public MakeCommands(CommandRepository commandRepo) {
-    this.commandRepo = commandRepo;
+  public CommandCommands(CommandService commandService) {
+    this.commandService = commandService;
   }
 
   @ShellMethod(value = "Makes a new command", key = "command make")
@@ -32,24 +32,17 @@ public class MakeCommands {
       @ShellOption(help = "The name of the command (defaults to null)", defaultValue = ShellOption.NULL) String name,
       @ShellOption(help = "The description of the command (defaults to null)", defaultValue = ShellOption.NULL) String description
   ) {
-    if (key == null) {
-      throw new InvalidInputException("A key is required to make a command");
-    }
-    Command c = new Command();
-    c.setValue(key);
-    c.setName(name);
-    c.setDescription(description);
-    commandRepo.save(c);
+    commandService.create(key, name, description);
     return String.format("Command `%s` created!", key);
   }
 
   @ShellMethod(value = "Lists commands", key = "command list")
   public List<String> listCommands() {
-    List<Command> commands = commandRepo.findAll();
+    List<Command> commands = commandService.getCommands();
 
     log.info("{} commands found", commands.size());
 
-    return commands.stream().map(Command::getValue).collect(Collectors.toList());
+    return commands.stream().map(Command::getKey).collect(Collectors.toList());
   }
 
 }

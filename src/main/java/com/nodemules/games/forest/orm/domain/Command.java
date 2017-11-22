@@ -22,6 +22,7 @@ public class Command extends AbstractEntity implements Serializable {
 
   private static final long serialVersionUID = -751326203893962510L;
 
+  @Column(unique = true)
   private String value;
 
   private String name;

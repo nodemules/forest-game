@@ -31,22 +31,13 @@ public class LoginService implements LoginOperations {
   @Override
   public User login(String username, String password) throws AuthenticationException {
     UserModel user = userManager.loginUser(username, password);
-    userContext.setCurrentUser(user);
+    userContext.login(user);
     return userMapper.toBean(user);
   }
 
   @Override
-  public User whoami() throws AuthenticationException {
-    UserModel currentUser = userContext.getCurrentUser();
-    if (currentUser == null) {
-      throw new AuthenticationException("User is not logged in!");
-    }
-    return userMapper.toBean(currentUser);
-  }
-
-  @Override
-  public boolean isUserLoggedIn() {
-    return userContext.isUserLoggedIn();
+  public void logout() throws AuthenticationException {
+    userContext.logout();
   }
 
 }
